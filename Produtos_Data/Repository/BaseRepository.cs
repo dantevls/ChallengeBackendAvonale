@@ -23,7 +23,7 @@ namespace Produtos_Data.Repository
         {
             try
             {
-                var result = _dataSet.SingleOrDefaultAsync(p => p.Id.Equals(id));
+                var result = await _dataSet.SingleOrDefaultAsync(p => p.Id.Equals(id));
                 if (result == null)
                     return false;
 
@@ -47,8 +47,6 @@ namespace Produtos_Data.Repository
                 {
                     entity.Id = Guid.NewGuid();
                 }
-                entity.Data_Compra = null;
-                entity.Valor_Ultima_Venda = null;
                 _dataSet.Add(entity);
 
 
@@ -63,14 +61,31 @@ namespace Produtos_Data.Repository
             return entity;
         }
 
-        public Task<E> SelectAsync(Guid id)
+        public async Task<E> SelectAsync(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _dataSet.SingleOrDefaultAsync(p => p.Id.Equals(id));
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public Task<List<E>> SelectAsync()
+        public async Task<List<E>> SelectAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _dataSet.ToListAsync();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
 
         public async Task<E> UpdateAsync(E entity)
@@ -81,11 +96,6 @@ namespace Produtos_Data.Repository
                 if (result == null)
                     return null;
 
-                if (result.Data_Compra != null)
-                    entity.Data_Compra = result.Data_Compra;
-
-                if (result.Valor_Ultima_Venda != null)
-                    entity.Valor_Ultima_Venda = result.Valor_Ultima_Venda;
 
                 _context.Entry(result).CurrentValues.SetValues(entity);
 
