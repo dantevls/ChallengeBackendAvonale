@@ -19,7 +19,7 @@ namespace ApiPagamentos.Controllers
 
         [HttpPost]
         [Route("compras")]
-        public async Task<ActionResult> PaymentValidation([FromBody] PaymentEntity payment)
+        public ActionResult PaymentValidation([FromBody] PaymentEntity payment)
         {
             if (!ModelState.IsValid)
             {

@@ -16,6 +16,7 @@ namespace ApiProdutos.Controllers
         {
             _service = service;
         }
+
         [HttpPost]
         public async Task<ActionResult> BuyRequest([FromBody] PaymentEntity payment)
         {

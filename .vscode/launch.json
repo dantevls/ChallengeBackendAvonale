@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Application/Pagamentos_Application/bin/Debug/net5.0/application.dll",
+            "program": "${workspaceFolder}/Application/Api_Produtos/bin/Debug/net5.0/Api_Produtos.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/Application/Pagamentos_Application",
+            "cwd": "${workspaceFolder}/Application/Api_Produtos",
             "stopAtEntry": false,
             // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
             "serverReadyAction": {
@@ -27,9 +27,43 @@
             }
         },
         {
+            "name": ".NET Core Launch Service",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/Application/Api_Pagamentos/bin/Debug/net5.0/Api_Pagamentos.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Application/Api_Pagamentos",
+            "stopAtEntry": false,
+            // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
+            "serverReadyAction": {
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach"
+        },
+    ],
+    "compounds": [
+        {
+            "name": "Compound",
+            "configurations": [
+                ".NET Core Launch (web)",
+                ".NET Core Launch Service"
+            ],
+            "presentation": {
+                "hidden": false,
+                "group": "${defaultBuildTask}",
+                "order": 1
+            }
         }
     ]
 }

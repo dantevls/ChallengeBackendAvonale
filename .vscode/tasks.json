@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Application/Pagamentos_Application/application.csproj",
+                "${workspaceFolder}/Application/Api_Produtos/Api_Produtos.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/Application/Pagamentos_Application/application.csproj",
+                "${workspaceFolder}/Application/Api_Produtos/Api_Produtos.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -32,11 +32,28 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/Application/Pagamentos_Application/application.csproj",
+                "${workspaceFolder}/Application/Api_Produtos/Api_Produtos.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Service",
+            "command": "dotnet",
+            "args": [
+                "build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/Application/Api_Pagamentos/Api_Pagamentos.csproj"
+            }
+        },
+        {
+            "label": "Build",
+            "dependsOn": [
+                "build",
+                "Service"
+            ]
         }
     ]
 }
