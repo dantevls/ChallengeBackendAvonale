@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Services\Produtos_Service\Service.csproj" />
+    <ProjectReference Include="..\..\Domain\Produtos_Domain\Domain.csproj" />
+    <ProjectReference Include="..\..\CrossCuting\Produtos_CrossCuting\CrossCuting.csproj" />
+  </ItemGroup>
+
+</Project>
