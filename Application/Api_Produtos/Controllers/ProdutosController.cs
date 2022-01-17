@@ -1,9 +1,11 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Produtos_Domain.Entities;
 using Produtos_Domain.Intefaces.Services.Products;
+using Produtos_Domain.ViewModels;
 
 namespace ApiProdutos.Controllers
 {
@@ -13,9 +15,11 @@ namespace ApiProdutos.Controllers
     {
 
         private readonly IProductService _service;
-        public ProdutosController(IProductService service)
+        private IMapper _mapper;
+        public ProdutosController(IProductService service, IMapper mapper)
         {
             _service = service;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -59,7 +63,7 @@ namespace ApiProdutos.Controllers
 
         [HttpPost]
 
-        public async Task<ActionResult> Post([FromBody] ProductEntity product)
+        public async Task<ActionResult> Post([FromBody] ProductViewModel product)
         {
             if (!ModelState.IsValid)
             {

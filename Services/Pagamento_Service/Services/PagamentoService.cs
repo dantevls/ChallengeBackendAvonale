@@ -1,16 +1,16 @@
 using System;
 using System.Threading.Tasks;
+using Pagamento_Domain.Entities;
 using Pagamentos_Domain.Entities;
 using Pagamentos_Domain.Interfaces;
-using Pagamentos_Domain.Models;
 
 namespace Pagamentos_Services.Services
 {
     public class PagamentoService : IPagamentoService
     {
-        public PaymentModel PaymentValidation(PaymentEntity payment)
+        public PaymentRequest PaymentValidation(PaymentEntity payment)
         {
-            var result = new PaymentModel();
+            var result = new PaymentRequest();
             if (payment.Valor > 100)
             {
                 result.Valor = payment.Valor;
@@ -18,6 +18,7 @@ namespace Pagamentos_Services.Services
             }
             else
             {
+                result.Valor = payment.Valor;
                 result.Estado = "REPROVADO";
             }
 

@@ -2,22 +2,24 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Produtos_Domain.Entities;
+using Produtos_Domain.Models;
+using Produtos_Domain.ViewModels;
 
 namespace Produtos_Domain.Intefaces.Services.Products
 {
     public interface IProductService
     {
-        Task<ProductEntity> Get(Guid id);
+        Task<ProductModel> Get(Guid id);
 
-        Task<List<ProductEntity>> GetAll();
+        Task<List<ProductModel>> GetAll();
 
-        Task<ProductEntity> Post(ProductEntity productEntity);
+        Task<ProductModel> Post(ProductViewModel product);
 
-        Task<ProductEntity> Put(ProductEntity productEntity);
+        Task<ProductModel> Put(ProductEntity productEntity);
 
         Task<bool> Delete(Guid id);
 
-        Task<PaymentResponse> BuyRequest(PaymentEntity paymentEntity);
+        Task<PaymentModel> BuyRequest(PaymentEntity paymentEntity);
         //Na verdade tem que ser um paymentRequest
     }
 }

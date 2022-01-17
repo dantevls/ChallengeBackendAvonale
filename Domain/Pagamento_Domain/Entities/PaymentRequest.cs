@@ -1,6 +1,6 @@
-namespace Pagamentos_Domain.Models
+namespace Pagamento_Domain.Entities
 {
-    public class PaymentModel
+    public class PaymentRequest
     {
         public decimal Valor { get; set; }
 

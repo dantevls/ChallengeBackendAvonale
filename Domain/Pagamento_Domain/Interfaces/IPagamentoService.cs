@@ -1,11 +1,11 @@
 using System.Threading.Tasks;
+using Pagamento_Domain.Entities;
 using Pagamentos_Domain.Entities;
-using Pagamentos_Domain.Models;
 
 namespace Pagamentos_Domain.Interfaces
 {
     public interface IPagamentoService
     {
-        PaymentModel PaymentValidation(PaymentEntity payment);
+        PaymentRequest PaymentValidation(PaymentEntity payment);
     }
 }

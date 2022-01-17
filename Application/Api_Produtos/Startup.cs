@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Produtos_CrossCuting.Depency;
+using Produtos_CrossCuting.Mappings;
 
 namespace Api_Produtos
 {
@@ -30,11 +32,30 @@ namespace Api_Produtos
             ConfigureService.ConfigureDependenciesService(services);
             ConfigureRepository.ConfigureDependenciesService(services);
 
+            var config = new AutoMapper.MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new EntityToModel());
+                cfg.AddProfile(new PaymentToModel());
+                cfg.AddProfile(new ProductViewModelToEntity());
+            }
+            );
+            IMapper mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api_Produtos", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Prova Backend Avonale",
+                    Version = "v1",
+                    Description = "Api para cadastro de produtos e pagamentos com AspNetCore.",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Dante Velôso Barbosa",
+                        Email = "danteveloso2019@gmail.com"
+                    }
+                });
             });
         }
 
@@ -44,11 +65,19 @@ namespace Api_Produtos
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api_Produtos v1"));
             }
 
+
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(s =>
+            {
+                s.SwaggerEndpoint("/swagger/v1/swagger.json", "Api Produtos/Pagamentos");
+                s.RoutePrefix = string.Empty;
+
+            });
+
 
             app.UseRouting();
 

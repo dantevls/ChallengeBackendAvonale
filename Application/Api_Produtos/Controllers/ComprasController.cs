@@ -20,6 +20,7 @@ namespace ApiProdutos.Controllers
         [HttpPost]
         public async Task<ActionResult> BuyRequest([FromBody] PaymentEntity payment)
         {
+
             var retorno = await _service.BuyRequest(payment);
             return Ok(retorno);
         }
