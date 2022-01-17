@@ -1,3 +1,5 @@
+using System;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Produtos_Domain.Entities;
@@ -21,8 +23,21 @@ namespace ApiProdutos.Controllers
         public async Task<ActionResult> BuyRequest([FromBody] PaymentEntity payment)
         {
 
-            var retorno = await _service.BuyRequest(payment);
-            return Ok(retorno);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var retorno = await _service.BuyRequest(payment);
+                return Ok(retorno);
+            }
+            catch (ArgumentException)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, "Ocorreu um erro Desconhecido");
+            }
+
+
         }
     }
 }

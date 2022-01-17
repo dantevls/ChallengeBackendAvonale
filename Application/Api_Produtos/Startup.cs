@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Produtos_CrossCuting.Depency;
 using Produtos_CrossCuting.Mappings;
+using Produtos_Domain.Errors;
 
 namespace Api_Produtos
 {
@@ -83,10 +84,12 @@ namespace Api_Produtos
 
             app.UseAuthorization();
 
+            app.UseMiddleware(typeof(ErrorMiddleware));
+
             app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+{
+    endpoints.MapControllers();
+});
         }
     }
 }
